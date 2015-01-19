@@ -1,0 +1,46 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
+    ],
+    "hash": "74b5f3eb443112e59534e917ae924a07",
+    "packages": [
+        {
+            "name": "silexlabs/amfphp",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/polem/amfphp-2.0.git",
+                "reference": "9779143d9f1a3f0bafb0ec394a933aa4d15b62d5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/polem/amfphp-2.0/zipball/9779143d9f1a3f0bafb0ec394a933aa4d15b62d5",
+                "reference": "9779143d9f1a3f0bafb0ec394a933aa4d15b62d5",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "Amfphp/ClassLoader.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Ariel Sommeria"
+                }
+            ],
+            "description": "Simple Remoting for Web Applications",
+            "time": "2012-08-01 12:54:58"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": {
+        "silexlabs/amfphp": 20
+    },
+    "platform": [],
+    "platform-dev": []
+}

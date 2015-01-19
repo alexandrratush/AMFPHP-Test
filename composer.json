@@ -1,0 +1,14 @@
+{
+    "name": "ALEX/amfphp-test",
+    "description": "amfphp example",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Alexandr Ratush",
+            "email": "alexandrratush@gmail.com"
+        }
+    ],
+    "require": {
+        "silexlabs/amfphp": "dev-master"
+    }
+}
