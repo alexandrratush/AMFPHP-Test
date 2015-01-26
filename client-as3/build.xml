@@ -6,8 +6,8 @@
 	<property name="tests.output.dir" value="${basedir}/tests-output"/>
 	<property name="tests.src" value="${basedir}/test"/>
 	<property name="tests.main.file" value="TestUnitRunner.as"/>
-    <property name="tests.swf.name" value="tests.swf"/>
-    <property name="tests.launch.app" value="${FLEX_HOME}/runtimes/player/11.1/win/FlashPlayerDebugger.exe"/>
+	<property name="tests.swf.name" value="tests.swf"/>
+	<property name="tests.launch.app" value="${FLEX_HOME}/runtimes/player/11.1/win/FlashPlayerDebugger.exe"/>
 	
     <taskdef name="mxmlc" classname="flex.ant.MxmlcTask" classpath="${FLEX_HOME}/ant/lib/flexTasks.jar"/>
     <taskdef resource="flexUnitTasks.tasks" classpath="${flex.unit.jar}"/>
@@ -34,20 +34,20 @@
 		</mxmlc>
 	</target>
 	
-    <target name="run-tests">
-        <flexunit
+	<target name="run-tests">
+		<flexunit
 			player="flash"
-            swf="${tests.output.dir}/${tests.swf.name}"
-            toDir="${tests.output.dir}"
-            haltonfailure="false" 
+			swf="${tests.output.dir}/${tests.swf.name}"
+			toDir="${tests.output.dir}"
+			haltonfailure="false" 
 			failureproperty="flexunit.failure"
-            verbose="true"
-            localTrusted="true"/>
-        <junitreport todir="${tests.output.dir}">
-            <fileset dir="${tests.output.dir}">
-                <include name="TEST-*.xml"/>
-            </fileset>
-            <report format="frames" todir="${tests.output.dir}/html"/>
-        </junitreport>
-    </target> 
+			verbose="true"
+			localTrusted="true"/>
+		<junitreport todir="${tests.output.dir}">
+			<fileset dir="${tests.output.dir}">
+				<include name="TEST-*.xml"/>
+			</fileset>
+			<report format="frames" todir="${tests.output.dir}/html"/>
+		</junitreport>
+	</target> 
 </project>
