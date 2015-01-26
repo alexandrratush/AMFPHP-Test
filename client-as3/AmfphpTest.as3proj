@@ -52,7 +52,7 @@
   </includeLibraries>
   <!-- SWC Libraries -->
   <libraryPaths>
-    <!-- example: <element path="..." /> -->
+    <element path="lib\flexunit-4.0.0.swc" />
   </libraryPaths>
   <!-- External Libraries -->
   <externalLibraryPaths>
