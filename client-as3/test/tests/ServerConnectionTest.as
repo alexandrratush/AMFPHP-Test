@@ -1,4 +1,4 @@
-package test.tests 
+package tests 
 {
 	import connection.ServerConnection;
 	/**

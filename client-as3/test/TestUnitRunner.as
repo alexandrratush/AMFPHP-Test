@@ -1,4 +1,4 @@
-package test 
+package 
 {
 	import flash.display.Sprite;
 	import org.flexunit.internals.TraceListener;

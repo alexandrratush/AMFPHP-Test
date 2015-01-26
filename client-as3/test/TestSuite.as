@@ -1,6 +1,6 @@
-package test 
+package 
 {
-	import test.tests.ServerConnectionTest;
+	import tests.ServerConnectionTest;
 	/**
 	 * ...
 	 * @author alexandrratush
