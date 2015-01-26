@@ -6,4 +6,5 @@
 # Build and Release Folders For FD
 **/bin/*.swf
 !**/bin/expressInstall.swf
-obj/
+client-as3/obj/
+client-as3/tests-output/
