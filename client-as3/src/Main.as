@@ -1,5 +1,6 @@
 package 
 {
+	import connection.ServerConnection;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	
@@ -19,7 +20,10 @@ package
 		private function init(e:Event = null):void 
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, init);
-			// entry point
+			
+			var serverConnection:ServerConnection = new ServerConnection();
+			serverConnection.connect("http://amfphp-test/server/", true);
+			serverConnection.call("ExampleService/returnOneParam", null, null, "qwerty");
 		}
 		
 	}
