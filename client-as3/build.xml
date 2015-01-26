@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<project name="Main" default="main" basedir=".">
+	<property file="build.properties"/>
+	<property name="project.src" location="${basedir}/src"/>
+	<property name="project.lib" location="${basedir}/lib"/>
+	<property name="tests.output.dir" value="${basedir}/tests-output"/>
+	<property name="tests.src" value="${basedir}/test"/>
+	<property name="tests.main.file" value="TestUnitRunner.as"/>
+    <property name="tests.swf.name" value="tests"/>
+	
+    <taskdef name="mxmlc" classname="flex.ant.MxmlcTask" classpath="${FLEX_HOME}/ant/lib/flexTasks.jar"/>
+	
+    <target name="main" depends="clean, compile-tests"/>
+	
+    <target name="clean">
+        <delete dir="${tests.output.dir}"/>
+        <mkdir dir="${tests.output.dir}"/>
+    </target>
+	
+	<target name="compile-tests">
+		<mxmlc 
+			file="${tests.src}/${tests.main.file}"
+			output="${tests.output.dir}/${tests.swf.name}.swf">
+				<source-path path-element="${FLEX_HOME}/frameworks"/>
+				<source-path path-element="${tests.src}"/>
+				<source-path path-element="${project.src}"/>
+				<compiler.library-path dir="${project.lib}" append="true">
+					<include name="*.swc" />
+				</compiler.library-path>
+		</mxmlc>
+	</target>
+	<!--
+    <target name="tests">
+        <flexunit
+            swf="${tests.dir}/tests.swf"
+            toDir="${tests.dir}"
+            haltonfailure="false" failureproperty="flexunit.failure"
+            verbose="true"
+            localTrusted="true"
+            command="${FLEX_HOME}/runtimes/player/11.4/win/FlashPlayerDebugger.exe"/>
+        <junitreport todir="${tests.dir}">
+            <fileset dir="${tests.dir}">
+                <include name="TEST-*.xml"/>
+            </fileset>
+            <report format="frames" todir="${tests.dir}/html"/>
+        </junitreport>
+    </target> -->
+</project>
