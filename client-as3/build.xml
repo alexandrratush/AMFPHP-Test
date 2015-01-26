@@ -9,15 +9,15 @@
 	<property name="tests.swf.name" value="tests.swf"/>
 	<property name="tests.launch.app" value="${FLEX_HOME}/runtimes/player/11.1/win/FlashPlayerDebugger.exe"/>
 	
-    <taskdef name="mxmlc" classname="flex.ant.MxmlcTask" classpath="${FLEX_HOME}/ant/lib/flexTasks.jar"/>
-    <taskdef resource="flexUnitTasks.tasks" classpath="${flex.unit.jar}"/>
-	
+	<taskdef name="mxmlc" classname="flex.ant.MxmlcTask" classpath="${FLEX_HOME}/ant/lib/flexTasks.jar"/>
+	<taskdef resource="flexUnitTasks.tasks" classpath="${flex.unit.jar}"/>
+
 	<target name="main" depends="clean, compile-tests, run-tests"/> 
-	
-    <target name="clean">
-        <delete dir="${tests.output.dir}"/>
-        <mkdir dir="${tests.output.dir}"/>
-    </target>
+
+	<target name="clean">
+		<delete dir="${tests.output.dir}"/>
+		<mkdir dir="${tests.output.dir}"/>
+	</target>
 	
 	<target name="compile-tests">
 		<mxmlc 
