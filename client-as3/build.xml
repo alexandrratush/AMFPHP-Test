@@ -6,11 +6,15 @@
 	<property name="tests.output.dir" value="${basedir}/tests-output"/>
 	<property name="tests.src" value="${basedir}/test"/>
 	<property name="tests.main.file" value="TestUnitRunner.as"/>
-    <property name="tests.swf.name" value="tests"/>
+    <property name="tests.swf.name" value="tests.swf"/>
+    <property name="tests.launch.app" value="${FLEX_HOME}/runtimes/player/11.1/win/FlashPlayerDebugger.exe"/>
 	
     <taskdef name="mxmlc" classname="flex.ant.MxmlcTask" classpath="${FLEX_HOME}/ant/lib/flexTasks.jar"/>
+    <!-- Set up FlexUnit Ant tasks -->
+    <taskdef resource="flexUnitTasks.tasks" classpath="${flex.unit.jar}"/>
 	
-    <target name="main" depends="clean, compile-tests"/>
+    <!-- <target name="main" depends="clean, compile-tests, run-tests"/> -->
+    <target name="main" depends="run-tests"/>
 	
     <target name="clean">
         <delete dir="${tests.output.dir}"/>
@@ -20,7 +24,7 @@
 	<target name="compile-tests">
 		<mxmlc 
 			file="${tests.src}/${tests.main.file}"
-			output="${tests.output.dir}/${tests.swf.name}.swf">
+			output="${tests.output.dir}/${tests.swf.name}">
 				<source-path path-element="${FLEX_HOME}/frameworks"/>
 				<source-path path-element="${tests.src}"/>
 				<source-path path-element="${project.src}"/>
@@ -29,20 +33,21 @@
 				</compiler.library-path>
 		</mxmlc>
 	</target>
-	<!--
-    <target name="tests">
+	
+    <target name="run-tests">
         <flexunit
-            swf="${tests.dir}/tests.swf"
-            toDir="${tests.dir}"
-            haltonfailure="false" failureproperty="flexunit.failure"
+			player="flash"
+            swf="${tests.output.dir}/${tests.swf.name}"
+            toDir="${tests.output.dir}"
+            haltonfailure="false" 
+			failureproperty="flexunit.failure"
             verbose="true"
-            localTrusted="true"
-            command="${FLEX_HOME}/runtimes/player/11.4/win/FlashPlayerDebugger.exe"/>
-        <junitreport todir="${tests.dir}">
-            <fileset dir="${tests.dir}">
+            localTrusted="true"/>
+        <junitreport todir="${tests.output.dir}">
+            <fileset dir="${tests.output.dir}">
                 <include name="TEST-*.xml"/>
             </fileset>
-            <report format="frames" todir="${tests.dir}/html"/>
+            <report format="frames" todir="${tests.output.dir}/html"/>
         </junitreport>
-    </target> -->
+    </target> 
 </project>
