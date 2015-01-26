@@ -42,7 +42,8 @@
 			haltonfailure="false" 
 			failureproperty="flexunit.failure"
 			verbose="true"
-			localTrusted="true"/>
+			localTrusted="true"
+			command="${tests.launch.app}"/>
 		<junitreport todir="${tests.output.dir}">
 			<fileset dir="${tests.output.dir}">
 				<include name="TEST-*.xml"/>
