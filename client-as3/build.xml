@@ -10,11 +10,9 @@
     <property name="tests.launch.app" value="${FLEX_HOME}/runtimes/player/11.1/win/FlashPlayerDebugger.exe"/>
 	
     <taskdef name="mxmlc" classname="flex.ant.MxmlcTask" classpath="${FLEX_HOME}/ant/lib/flexTasks.jar"/>
-    <!-- Set up FlexUnit Ant tasks -->
     <taskdef resource="flexUnitTasks.tasks" classpath="${flex.unit.jar}"/>
 	
-    <!-- <target name="main" depends="clean, compile-tests, run-tests"/> -->
-    <target name="main" depends="run-tests"/>
+	<target name="main" depends="clean, compile-tests, run-tests"/> 
 	
     <target name="clean">
         <delete dir="${tests.output.dir}"/>
@@ -24,7 +22,9 @@
 	<target name="compile-tests">
 		<mxmlc 
 			file="${tests.src}/${tests.main.file}"
-			output="${tests.output.dir}/${tests.swf.name}">
+			output="${tests.output.dir}/${tests.swf.name}"
+			failonerror="true"
+			static-link-runtime-shared-libraries="true">
 				<source-path path-element="${FLEX_HOME}/frameworks"/>
 				<source-path path-element="${tests.src}"/>
 				<source-path path-element="${project.src}"/>
