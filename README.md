@@ -1,2 +1,3 @@
 # AMFPHP
-## Learning and usage examples
+
+Learning and usage examples
