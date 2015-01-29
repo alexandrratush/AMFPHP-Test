@@ -1,6 +1,7 @@
 package tests 
 {
 	import connection.ServerConnection;
+	import flexunit.framework.Assert;
 	/**
 	 * ...
 	 * @author alexandrratush
@@ -26,6 +27,20 @@ package tests
 		public function connect():void
 		{
 			_serverConnection.connect("http://amfphp-test/server/");
+		}
+		
+		[Test]
+		public function newTrueTest():void
+		{
+			var x:int = 2 * 2;
+			Assert.assertEquals(x, 4);
+		}
+		
+		[Test]
+		public function newFaultTest():void
+		{
+			var x:int = 2 * 2;
+			Assert.assertEquals(x, 3);
 		}
 		
 	}
