@@ -31,9 +31,7 @@ package tests
 		{
 			var asyncHandler:Function = Async.asyncHandler(this,
 					asyncEventHandler,
-					2000,
-					null,
-					handleTimeout
+					2000
 			);
 			
 			_serverConnection.addEventListener(ServerConnection.RESULT, asyncHandler, false, 0, true);
@@ -44,11 +42,6 @@ package tests
 		{
 			Assert.assertTrue(e.data is String);
 			Assert.assertEquals("qwerty", e.data);
-		}
-
-		private function handleTimeout(passThroughData:Object):void
-		{
-			Assert.fail("Timeout reached before event");
 		}
 		
 	}
