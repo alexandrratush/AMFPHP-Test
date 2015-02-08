@@ -1,7 +1,9 @@
 package tests 
 {
 	import connection.ServerConnection;
+	import event.ObjectEvent;
 	import flexunit.framework.Assert;
+	import org.flexunit.async.Async;
 	/**
 	 * ...
 	 * @author alexandrratush
@@ -14,6 +16,7 @@ package tests
 		public function setUp():void
 		{
 			_serverConnection = new ServerConnection();
+			_serverConnection.connect("http://amfphp-test/server/");
 		}
 		
 		[After]
@@ -23,24 +26,29 @@ package tests
 			_serverConnection = null;
 		}
 		
-		[Test]
-		public function connect():void
+		[Test(async, description="Test return one param from server")]
+		public function returnOneParam():void
 		{
-			_serverConnection.connect("http://amfphp-test/server/");
+			var asyncHandler:Function = Async.asyncHandler(this,
+					asyncEventHandler,
+					2000,
+					null,
+					handleTimeout
+			);
+			
+			_serverConnection.addEventListener(ServerConnection.RESULT, asyncHandler, false, 0, true);
+			_serverConnection.call("ExampleService/returnOneParam", null, null, "qwerty");
 		}
 		
-		[Test]
-		public function newTrueTest():void
+		private function asyncEventHandler(e:ObjectEvent, passThroughData:Object):void
 		{
-			var x:int = 2 * 2;
-			Assert.assertEquals(x, 4);
+			Assert.assertTrue("Data is string: ", e.data is String);
+			Assert.assertEquals("qwerty", e.data);
 		}
-		
-		[Test]
-		public function newFaultTest():void
+
+		private function handleTimeout(passThroughData:Object):void
 		{
-			var x:int = 2 * 2;
-			Assert.assertEquals(x, 3);
+			Assert.fail("Timeout reached before event");
 		}
 		
 	}
