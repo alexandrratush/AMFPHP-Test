@@ -13,6 +13,7 @@ package tests
 	public class ServerConnectionTest 
 	{
 		public static var data:Array = [ ["test"], ["test2"] ];
+		public static var data1:Array = [ [3, 4], [20, 5], [.5, 1.5] ];
 		
 		private var _serverConnection:ServerConnection;
 		
@@ -34,7 +35,7 @@ package tests
 		public function returnOneParam(value:String):void
 		{
 			var asyncHandler:Function = Async.asyncHandler(this,
-					asyncReturnOneParamHandler,
+					returnOneParamAsyncHandler,
 					2000,
 					value
 			);
@@ -43,9 +44,27 @@ package tests
 			_serverConnection.call("ExampleService/returnOneParam", null, null, value);
 		}
 		
-		private function asyncReturnOneParamHandler(e:ObjectEvent, value:Object):void
+		private function returnOneParamAsyncHandler(e:ObjectEvent, value:Object):void
 		{
 			Assert.assertTrue(e.data is String);
+			Assert.assertEquals(e.data, value);
+		}
+		
+		[Test(async, description = "Return sum", dataProvider="data1")]
+		public function returnSumParam(value1:int, value2:int):void
+		{
+			var asyncHandler:Function = Async.asyncHandler(this,
+					returnSumAsyncHandler,
+					2000,
+					value1 + value2
+			);
+			
+			_serverConnection.addEventListener(ServerConnection.RESULT, asyncHandler, false, 0, true);
+			_serverConnection.call("ExampleService/returnSum", null, null, value1, value2);
+		}
+		
+		private function returnSumAsyncHandler(e:ObjectEvent, value:Object):void
+		{
 			Assert.assertEquals(e.data, value);
 		}
 		
