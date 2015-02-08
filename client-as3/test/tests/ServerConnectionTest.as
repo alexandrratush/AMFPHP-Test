@@ -8,8 +8,12 @@ package tests
 	 * ...
 	 * @author alexandrratush
 	 */
+	
+	[RunWith("org.flexunit.runners.Parameterized")]
 	public class ServerConnectionTest 
 	{
+		public static var data:Array = [ ["test"], ["test2"] ];
+		
 		private var _serverConnection:ServerConnection;
 		
 		[Before]
@@ -26,22 +30,23 @@ package tests
 			_serverConnection = null;
 		}
 		
-		[Test(async, description="Return one param from server")]
-		public function returnOneParam():void
+		[Test(async, description = "Return one param from server", dataProvider="data")]
+		public function returnOneParam(value:String):void
 		{
 			var asyncHandler:Function = Async.asyncHandler(this,
 					asyncEventHandler,
-					2000
+					2000,
+					value
 			);
 			
 			_serverConnection.addEventListener(ServerConnection.RESULT, asyncHandler, false, 0, true);
-			_serverConnection.call("ExampleService/returnOneParam", null, null, "qwerty");
+			_serverConnection.call("ExampleService/returnOneParam", null, null, value);
 		}
 		
-		private function asyncEventHandler(e:ObjectEvent, passThroughData:Object):void
+		private function asyncEventHandler(e:ObjectEvent, value:Object):void
 		{
 			Assert.assertTrue(e.data is String);
-			Assert.assertEquals("qwerty", e.data);
+			Assert.assertEquals(e.data, value);
 		}
 		
 	}
