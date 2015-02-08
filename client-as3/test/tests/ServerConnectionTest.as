@@ -68,6 +68,23 @@ package tests
 			Assert.assertEquals(e.data, value);
 		}
 		
+		[Test(async, description = "Return null")]
+		public function returnNull():void
+		{
+			var asyncHandler:Function = Async.asyncHandler(this,
+					returnNullAsyncHandler,
+					2000
+			);
+			
+			_serverConnection.addEventListener(ServerConnection.RESULT, asyncHandler, false, 0, true);
+			_serverConnection.call("ExampleService/returnNull", null, null);
+		}
+		
+		private function returnNullAsyncHandler(e:ObjectEvent, value:Object):void
+		{
+			Assert.assertNull(e.data);
+		}
+		
 	}
 
 }
