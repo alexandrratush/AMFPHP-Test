@@ -16,7 +16,7 @@ package tests
 		public function setUp():void
 		{
 			_serverConnection = new ServerConnection();
-			_serverConnection.connect("http://amfphp-test/server/");
+			_serverConnection.connect(TestConfig.SERVER_GATEWAY);
 		}
 		
 		[After]
@@ -26,7 +26,7 @@ package tests
 			_serverConnection = null;
 		}
 		
-		[Test(async, description="Test return one param from server")]
+		[Test(async, description="Return one param from server")]
 		public function returnOneParam():void
 		{
 			var asyncHandler:Function = Async.asyncHandler(this,
@@ -42,7 +42,7 @@ package tests
 		
 		private function asyncEventHandler(e:ObjectEvent, passThroughData:Object):void
 		{
-			Assert.assertTrue("Data is string: ", e.data is String);
+			Assert.assertTrue(e.data is String);
 			Assert.assertEquals("qwerty", e.data);
 		}
 
