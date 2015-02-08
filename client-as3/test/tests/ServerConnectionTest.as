@@ -34,7 +34,7 @@ package tests
 		public function returnOneParam(value:String):void
 		{
 			var asyncHandler:Function = Async.asyncHandler(this,
-					asyncEventHandler,
+					asyncReturnOneParamHandler,
 					2000,
 					value
 			);
@@ -43,7 +43,7 @@ package tests
 			_serverConnection.call("ExampleService/returnOneParam", null, null, value);
 		}
 		
-		private function asyncEventHandler(e:ObjectEvent, value:Object):void
+		private function asyncReturnOneParamHandler(e:ObjectEvent, value:Object):void
 		{
 			Assert.assertTrue(e.data is String);
 			Assert.assertEquals(e.data, value);
