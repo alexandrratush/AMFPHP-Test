@@ -1,6 +1,6 @@
 package 
 {
-	import tests.ServerConnectionTest;
+	import tests.ExampleServiceTest;
 	/**
 	 * ...
 	 * @author alexandrratush
@@ -9,7 +9,7 @@ package
 	[RunWith("org.flexunit.runners.Suite")]
 	public class TestSuite 
 	{
-		public var serverConnectionTest:ServerConnectionTest;
+		public var serverConnectionTest:ExampleServiceTest;
 	}
 
 }

@@ -4,13 +4,9 @@ package tests
 	import event.ObjectEvent;
 	import flexunit.framework.Assert;
 	import org.flexunit.async.Async;
-	/**
-	 * ...
-	 * @author alexandrratush
-	 */
-	
+
 	[RunWith("org.flexunit.runners.Parameterized")]
-	public class ServerConnectionTest 
+	public class ExampleServiceTest 
 	{
 		public static var data:Array = [ ["test"], ["test2"] ];
 		public static var data1:Array = [ [3, 4], [20, 5], [.5, 1.5] ];
