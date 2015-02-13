@@ -81,6 +81,24 @@ package tests
 			Assert.assertNull(e.data);
 		}
 		
+		[Test(async, description = "Return bla")]
+		public function returnBla():void
+		{
+			var asyncHandler:Function = Async.asyncHandler(this,
+					returnBlaAsyncHandler,
+					2000
+			);
+			
+			_serverConnection.addEventListener(ServerConnection.RESULT, asyncHandler, false, 0, true);
+			_serverConnection.call("ExampleService/returnBla", null, null);
+		}
+		
+		private function returnBlaAsyncHandler(e:ObjectEvent, value:Object):void
+		{
+			Assert.assertTrue(e.data is String);
+			Assert.assertEquals("bla", e.data);
+		}
+		
 	}
 
 }
