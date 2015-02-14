@@ -99,6 +99,25 @@ package tests
 			Assert.assertEquals("bla", e.data);
 		}
 		
+		[Test(async, description = "Throw exception from server")]
+		public function throwException():void
+		{
+			var asyncHandler:Function = Async.asyncHandler(this,
+					throwExceptionAsyncHandler,
+					2000,
+					{arg1:"error"}
+			);
+			
+			_serverConnection.addEventListener(ServerConnection.ERROR, asyncHandler, false, 0, true);
+			_serverConnection.call("ExampleService/throwException", null, null, "error");
+		}
+		
+		private function throwExceptionAsyncHandler(e:ObjectEvent, value:Object):void
+		{
+			Assert.assertEquals(e.data.faultString, "test exception " + value.arg1);
+			Assert.assertEquals(e.data.faultCode, 123);
+		}
+		
 	}
 
 }
