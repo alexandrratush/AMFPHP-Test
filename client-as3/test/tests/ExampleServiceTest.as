@@ -118,6 +118,23 @@ package tests
 			Assert.assertEquals(e.data.faultCode, 123);
 		}
 		
+		[Test(async, description = "Return after one second")]
+		public function returnAfterOneSecond():void
+		{
+			var asyncHandler:Function = Async.asyncHandler(this,
+					returnAfterOneSecondAsyncHandler,
+					3000
+			);
+			
+			_serverConnection.addEventListener(ServerConnection.RESULT, asyncHandler, false, 0, true);
+			_serverConnection.call("ExampleService/returnAfterOneSecond", null, null);
+		}
+		
+		private function returnAfterOneSecondAsyncHandler(e:ObjectEvent, value:Object):void
+		{
+			Assert.assertEquals(e.data, "slept for 1 second");
+		}
+		
 	}
 
 }
