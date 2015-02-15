@@ -48,6 +48,11 @@ package connection
 			}		
 		}
 		
+		public function addHeader(operation:String, mustUnderstand:Boolean = false, param:Object = null):void
+		{
+			_nc.addHeader(operation, mustUnderstand, param);
+		}
+		
 		public function call(method:String, resultCallback:Function, errorCallback:Function, ...args):void
 		{
 			var resultCallback:Function = (resultCallback != null) ? resultCallback : onResult;
