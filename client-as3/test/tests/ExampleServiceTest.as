@@ -135,6 +135,24 @@ package tests
 			Assert.assertEquals(e.data, "slept for 1 second");
 		}
 		
+		[Test(async, description = "Return test header")]
+		public function returnTestHeader():void
+		{
+			var asyncHandler:Function = Async.asyncHandler(this,
+					returnTestHeaderAsyncHandler,
+					2000
+			);
+			
+			_serverConnection.addEventListener(ServerConnection.RESULT, asyncHandler, false, 0, true);
+			_serverConnection.addHeader("test", true, {val:"qwerty"});
+			_serverConnection.call("ExampleService/returnTestHeader", null, null);
+		}
+		
+		private function returnTestHeaderAsyncHandler(e:ObjectEvent, value:Object):void
+		{
+			Assert.assertEquals(e.data.val, "qwerty");
+		}
+		
 	}
 
 }
