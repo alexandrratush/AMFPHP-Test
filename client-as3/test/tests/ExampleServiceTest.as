@@ -153,6 +153,27 @@ package tests
 			Assert.assertEquals(e.data.val, "qwerty");
 		}
 		
+		[Test(async, description = "Return array")]
+		public function returnArray():void
+		{
+			var asyncHandler:Function = Async.asyncHandler(this,
+					returnArrayAsyncHandler,
+					2000
+			);
+			
+			_serverConnection.addEventListener(ServerConnection.RESULT, asyncHandler, false, 0, true);
+			_serverConnection.addHeader("test", true, {val:"qwerty"});
+			_serverConnection.call("ExampleService/returnArray", null, null);
+		}
+		
+		private function returnArrayAsyncHandler(e:ObjectEvent, value:Object):void
+		{
+			Assert.assertEquals(e.data["0"], 0);
+			Assert.assertEquals(e.data["1"], 2);
+			Assert.assertEquals(e.data["3"], 4);
+			Assert.assertEquals(e.data["5"]["6"], 7);
+		}
+		
 	}
 
 }
