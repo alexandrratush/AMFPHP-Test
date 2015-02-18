@@ -174,6 +174,22 @@ package tests
 			Assert.assertEquals(e.data["5"]["6"], 7);
 		}
 		
+		[Test(async, description = "Return opposite")]
+		public function returnOpposite():void
+		{
+			var asyncHandler:Function = Async.asyncHandler(this,
+					returnOppositeAsyncHandler,
+					2000
+			);
+			
+			_serverConnection.addEventListener(ServerConnection.RESULT, asyncHandler, false, 0, true);
+			_serverConnection.call("ExampleService/returnOpposite", null, null, true);
+		}
+		
+		private function returnOppositeAsyncHandler(e:ObjectEvent, value:Object):void
+		{
+			Assert.assertEquals(e.data, false);
+		}
 	}
 
 }
